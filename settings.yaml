@@ -1,7 +1,7 @@
 mysql:
   host: 127.0.0.1
   port: 3306
-  config: charset=utf8mb4&parseTime=Truc&loc=Local
+  config: charset=utf8mb4
   db: gvb_db
   user: root
   password: lph991028
