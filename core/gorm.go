@@ -6,7 +6,6 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gvd_project/global"
-	"log"
 	"time"
 )
 
@@ -14,7 +13,7 @@ import (
 func InitGorm() *gorm.DB {
 	if global.Config.Mysql.Host == "" {
 		//global.Log.Warn("未配置mysql， 取消gorm连接")
-		log.Println("未配置mysql， 取消gorm连接")
+		global.Log.Warnln("未配置mysql， 取消gorm连接")
 		return nil
 	}
 	dsn := global.Config.Mysql.Dsn()
@@ -31,8 +30,8 @@ func InitGorm() *gorm.DB {
 	})
 	if err != nil {
 		//global.Log.Error(fmt.Sprintf("[%s] mysql连接失败", dsn))
-		log.Fatalf(fmt.Sprintf("[%s] mysql连接失败", dsn))
-		//panic(err)
+		global.Log.Errorln(fmt.Sprintf("[%s] mysql连接失败", dsn))
+		panic(err)
 	}
 
 	sqlDB, _ := db.DB()
