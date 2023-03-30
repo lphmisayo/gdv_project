@@ -34,6 +34,7 @@ func InitGorm() *gorm.DB {
 		log.Fatalf(fmt.Sprintf("[%s] mysql连接失败", dsn))
 		//panic(err)
 	}
+
 	sqlDB, _ := db.DB()
 	sqlDB.SetMaxIdleConns(10)               //最大空闲连接数
 	sqlDB.SetMaxOpenConns(100)              //最多可容纳
