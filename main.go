@@ -6,6 +6,7 @@ import (
 	"gvd_project/global"
 )
 
+// 服务入口
 func main() {
 	core.CoreConf() //读取配置文件
 	fmt.Println(global.Config)
