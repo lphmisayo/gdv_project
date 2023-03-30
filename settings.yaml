@@ -1,15 +1,18 @@
 mysql:
   host: 127.0.0.1
+#  host:
   port: 3306
   config: charset=utf8mb4
   db: gvb_db
+#  user: root
   user: root
-  password: lph991028
+#  password: lph991028
+  password: 123456
   log_level: dev
   max_idle_conns: 10
   max_open_conns: 100
 logger:
-  level: info
+  level: debug
   prefix: '[gvd]'
   director: log
   show_line: true
