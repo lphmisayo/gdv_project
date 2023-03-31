@@ -11,7 +11,7 @@ import (
 // 服务入口
 func main() {
 	//读取配置文件
-	core.CoreConf()
+	core.InitConf()
 	fmt.Println(global.Config)
 	//设置日志格式
 	global.Log = core.InitLogger()

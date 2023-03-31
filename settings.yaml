@@ -1,16 +1,11 @@
 mysql:
   host: 127.0.0.1
-#  host:
   port: 3306
   config: charset=utf8mb4
   db: gvb_db
-#  user: root
   user: root
-#  password: lph991028
-  password: 123456
+  password: "123456"
   log_level: dev
-  max_idle_conns: 10
-  max_open_conns: 100
 logger:
   level: info
   prefix: '[gvd]'
@@ -18,6 +13,12 @@ logger:
   show_line: true
   log_in_console: true
 system:
-  host: "0.0.0.0"
+  host: 0.0.0.0
   port: 8080
   env: release
+site_info:
+  create_at: "2023-02-15"
+  title: LPH的个人博客
+  email: 2337002922@qq.com
+  slogan: gvd博客
+  github_url: https://github.com/lphmisayo
