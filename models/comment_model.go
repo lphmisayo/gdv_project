@@ -12,5 +12,5 @@ type CommentModel struct {
 	Article            ArticleModel    `json:"-" gorm:"foreignKey:ArticleID"`
 	ArticleID          uint            `json:"article_id"`
 	User               UserModel       `json:"user"`
-	UserID             uint            `json:"user_id" gorm:"size:10"`
+	UserID             uint            `json:"user_id"`
 }

@@ -1,6 +1,6 @@
 package models
 
-type Message_Model struct {
+type MessageModel struct {
 	MODEL
 	SendUserID       uint      `json:"send_user_id" gorm:"primaryKey"`
 	SendUserModel    UserModel `json:"-" gorm:"foreignKey:SendUserID"`

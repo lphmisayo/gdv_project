@@ -12,7 +12,7 @@ mysql:
   max_idle_conns: 10
   max_open_conns: 100
 logger:
-  level: debug
+  level: info
   prefix: '[gvd]'
   director: log
   show_line: true
@@ -20,4 +20,4 @@ logger:
 system:
   host: "0.0.0.0"
   port: 8080
-  env: debug
+  env: release

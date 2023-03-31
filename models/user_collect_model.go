@@ -2,10 +2,10 @@ package models
 
 import "time"
 
-type User2Collect struct {
+type UserCollectModel struct {
 	UserID       uint         `gorm:"primaryKey"`
-	UserModel    UserModel    `gorm:"ForeignKey:UserID"`
+	UserModel    UserModel    `gorm:"foreignKey:UserID"`
 	ArticleID    uint         `gorm:"primaryKey"`
-	ArticleModel ArticleModel `gorm:"ForeignKey:ArticleID"`
+	ArticleModel ArticleModel `gorm:"foreignKey:ArticleID"`
 	CreateAt     time.Time
 }

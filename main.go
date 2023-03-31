@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"gvd_project/core"
+	"gvd_project/flag"
 	"gvd_project/global"
 	"gvd_project/router"
 )
@@ -22,11 +23,21 @@ func main() {
 	global.DB = core.InitGorm()
 	//fmt.Println(global.DB)
 
+	//命令行参数绑定
+	option := flag.Parse()
+	if flag.IsWebStop(option) {
+		flag.SwitchOption(option)
+		return
+	}
+
 	//获取ip端口配置
 	addr := global.Config.System.Addr()
 	//获取路由配置
 	routers := router.InitRouter()
 	global.Log.Infof("gvd_project 运行在：%s", addr)
 	//启动服务
-	routers.Run(addr)
+	err := routers.Run(addr)
+	if err != nil {
+		global.Log.Fatalf(err.Error())
+	}
 }
