@@ -8,6 +8,7 @@ import (
 	"gvd_project/models/res"
 )
 
+// SettingsInfoUpdate 多
 func (s SettingsApi) SettingsInfoUpdate(c *gin.Context) {
 	var uri SettingUri
 	err := c.ShouldBindUri(&uri)

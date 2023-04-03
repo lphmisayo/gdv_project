@@ -35,6 +35,7 @@ email:
   use_ssl: true
   user_tls: false
 qiniu:
+  enable: false
   access_key: UMM-xx-FdRIf-xx
   secret_key: xx
   bucket: lphmisaka
@@ -45,3 +46,7 @@ jwt:
   secret: lph
   expire: 48
   issuer: lph
+local:
+  path: uploads/file
+  store_path: uploads/file
+  size: 0

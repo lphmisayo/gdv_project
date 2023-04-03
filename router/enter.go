@@ -10,5 +10,6 @@ func InitRouter() *gin.Engine {
 	router := gin.Default()               //初始化路由
 	apiRouterGroup := router.Group("api")
 	SettingsRouter(apiRouterGroup) //系统配置
+	ImagesRouter(apiRouterGroup)   //图片接口
 	return router
 }
