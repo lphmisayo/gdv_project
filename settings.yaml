@@ -49,4 +49,4 @@ jwt:
 local:
   path: uploads/file
   store_path: uploads/file
-  size: 0
+  size: 2

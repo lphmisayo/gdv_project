@@ -5,7 +5,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"gvd_project/global"
 	"gvd_project/models/res"
+	"io/fs"
 	"mime/multipart"
+	"os"
 	"path"
 )
 
@@ -44,12 +46,18 @@ func (ImageApi) ImagesUploadView(c *gin.Context) {
 
 	//判断路径是否存在
 	//不存在就创建
+	dir, err := os.ReadDir(global.Config.Local.Path)
+	if err != nil {
+		err = os.MkdirAll(global.Config.Local.Path, fs.ModePerm)
+		fmt.Println(err)
+		fmt.Println(dir, err)
+	}
 
 	//上传失败数组
 	UploadFiles := make([]FileUploadResponse, 0)
 
 	for _, file := range fileList {
-		filePath := path.Join(pathDir, file.Filename)
+		filePath := path.Join(global.Config.Local.Path, file.Filename)
 		//判断大小
 		fileSize := float64(file.Size) / float64(1024*1024)
 		fmt.Println(filePath, fileSize)
