@@ -22,14 +22,18 @@ site_info:
   email: 2337002922@qq.com
   slogan: gvd博客
   github_url: https://github.com/lphmisayo
-jwt:
-  secret: "lph"
-  expire: 48
-  issuer: lph
-qq:
-  app_id: "xx"
-  key: xx
-  redirect: http://xx.xx.com/login?flag=qq
+QQ:
+  app_id: xxxx.xxxx
+  key: testPw
+  redirect: testRe
+email:
+  host: xxx.xx.x.x
+  port: 330
+  user: 2337002922@qq.com
+  password: test
+  default_from_email: https://github.com/lphmisayo
+  use_ssl: true
+  user_tls: false
 qiniu:
   access_key: UMM-xx-FdRIf-xx
   secret_key: xx
@@ -37,12 +41,7 @@ qiniu:
   cdn: xx://xx.xx.com/
   zone: xx
   size: 5
-email:
-  host: xxxx.qq.com
-  port: 465
-  user: xxx@qq.com
-  password: xxx
-  default_from_email: lphmisaka
-  use_ssl: xx
-  user_tls: xx
-
+jwt:
+  secret: lph
+  expire: 48
+  issuer: lph

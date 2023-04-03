@@ -6,11 +6,13 @@ type ErrCode int
 const (
 	SettingError ErrCode = 3001 //系统配置错误
 	ParamError   ErrCode = 3002 //参数错误
+	UriError     ErrCode = 3003 //Uri错误
 )
 
 var (
 	ErrMap = map[ErrCode]string{
 		SettingError: "系统配置错误",
 		ParamError:   "参数错误",
+		UriError:     "Uri错误",
 	}
 )
