@@ -8,6 +8,7 @@ const (
 	ParamError     ErrCode = 3002 //参数错误
 	UriError       ErrCode = 3003 //Uri错误
 	FileExistError ErrCode = 3004 //文件不存在
+	FileTypeError  ErrCode = 3005 //文件格式错误
 )
 
 var (
@@ -16,5 +17,6 @@ var (
 		ParamError:     "参数错误",
 		UriError:       "Uri错误",
 		FileExistError: "文件不存在",
+		FileTypeError:  "文件格式错误",
 	}
 )
