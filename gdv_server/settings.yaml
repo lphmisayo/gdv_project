@@ -15,7 +15,7 @@ logger:
 system:
   host: 0.0.0.0
   port: 8080
-  env: release
+  env: debug
 site_info:
   create_at: "2023-02-15"
   title: LPH的个人博客

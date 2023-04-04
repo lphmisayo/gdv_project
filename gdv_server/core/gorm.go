@@ -6,6 +6,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gvd_server/global"
+	"gvd_server/models"
 	"time"
 )
 
@@ -19,11 +20,16 @@ func InitGorm() *gorm.DB {
 	dsn := global.Config.Mysql.Dsn()
 
 	var mysqlLogger logger.Interface
-	if global.Config.System.Env == "dev" {
+	var mysqlLogSt models.MysqlLogSt
+	if global.Config.System.Env == "debug" {
 		mysqlLogger = logger.Default.LogMode(logger.Info)
+		mysqlLogSt.Debug = true
 	} else {
 		mysqlLogger = logger.Default.LogMode(logger.Error) // 只打印错误的sql
+		mysqlLogSt.Debug = false
 	}
+	mysqlLogSt.MysqlLog = logger.Default.LogMode(logger.Info)
+	global.MysqlLogConfig = &mysqlLogSt
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: mysqlLogger,

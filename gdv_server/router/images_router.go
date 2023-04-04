@@ -10,5 +10,6 @@ func ImagesRouter(router *gin.RouterGroup) {
 	{
 		router.POST("image", imageApi.ImageUploadView)
 		router.POST("images", imageApi.ImagesUploadView)
+		router.GET("images", imageApi.ImageListView)
 	}
 }
