@@ -2,6 +2,7 @@ package res
 
 import (
 	"github.com/gin-gonic/gin"
+	"gvd_server/utils"
 	"net/http"
 )
 
@@ -68,4 +69,9 @@ func FailWithCode(code ErrCode, c *gin.Context) {
 		return
 	}
 	Result(Err, map[string]any{}, "未知错误", c)
+}
+
+func FailWithError(err error, obj any, c *gin.Context) {
+	errStr := utils.GetValidMsg(err, obj)
+	FailWithMsg(errStr, c)
 }

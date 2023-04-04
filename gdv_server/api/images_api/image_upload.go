@@ -4,42 +4,33 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"gvd_server/global"
-	"gvd_server/models"
 	"gvd_server/models/res"
-	"gvd_server/utils"
-	"io"
+	"gvd_server/service"
+	"gvd_server/service/image_ser"
 	"io/fs"
 	"mime/multipart"
 	"os"
 	"path"
-	"strings"
-)
-
-var (
-	//图片上传白名单
-	WhiteImageList []string = []string{
-		"jpg", "png", "jpeg", "ico", "tiff", "gif", "svg", "webp",
-	}
 )
 
 var pathDir = "uploads"
 
-type FileUploadResponse struct {
+/*type FileUploadResponse struct {
 	FileName string `json:"fileName"`
 	Code     int    `json:"code"`
 	Msg      string `json:"msg"`
 }
-
-// ImageUploadView 单个图片上传
-func (i ImageApi) ImageUploadView(c *gin.Context) {
-	fileHeader, err := c.FormFile("image")
-	if err != nil {
-		res.FailWithMsg(err.Error(), c)
-		return
+*/
+func initFileUploadRes(f []image_ser.FileUploadResponse, code int, file *multipart.FileHeader, msg string) []image_ser.FileUploadResponse {
+	if f == nil {
+		f = make([]image_ser.FileUploadResponse, 0)
 	}
-	fmt.Println(fileHeader.Header)
-	fmt.Println(fileHeader.Size)
-	fmt.Println(fileHeader.Filename)
+	f = append(f, image_ser.FileUploadResponse{
+		FileName: file.Filename,
+		Code:     code,
+		Msg:      msg,
+	})
+	return f
 }
 
 // ImagesUploadView 多个图片上传
@@ -65,72 +56,31 @@ func (ImageApi) ImagesUploadView(c *gin.Context) {
 	}
 
 	//上传失败数组
-	UploadFiles := make([]FileUploadResponse, 0)
+	UploadFiles := make([]image_ser.FileUploadResponse, 0)
 
 	for _, file := range fileList {
-		fileName := file.Filename
-		nameList := strings.Split(fileName, ".")
-		suffix := strings.ToLower(nameList[len(nameList)-1])
-		//检查上传文件类型是否匹配
-		if !utils.CheckInStrList(suffix, WhiteImageList) {
-			UploadFiles = initFileUploadRes(UploadFiles, -1, file, "上传失败，文件类型不匹配")
-			continue
-		}
 		filePath := path.Join(global.Config.Local.Path, file.Filename)
-		//判断大小
-		fileSize := float64(file.Size) / float64(1024*1024)
-		fmt.Println(filePath, fileSize)
-		fmt.Println(global.Config.Local.Size)
-		if fileSize > float64(global.Config.Local.Size) {
-			UploadFiles = initFileUploadRes(UploadFiles, -1, file, "上传失败：超出上传大小")
-			continue
-		}
 
-		//生成文件md5
-		fileObject, err := file.Open()
-		if err != nil {
-			global.Log.Error(err.Error())
-		}
-		byteData, err := io.ReadAll(fileObject)
-		if err != nil {
-			global.Log.Error(err.Error())
-		}
-		md5Str := utils.MD5(string(byteData))
-		fmt.Println(md5Str)
-		var bannerModel models.BannerModel
-		errDB := global.DB.Take(&bannerModel, "hash = ?", md5Str).Error
-		if errDB == nil {
-			// 找到了
-			UploadFiles = initFileUploadRes(UploadFiles, -1, file, "上传失败：该文件已存在！")
-			continue
-		} else {
-			fmt.Println(errDB.Error())
-		}
-
+		fileResponse := service.ServiceApp.ImageService.ImageUploadService(file, filePath)
 		err = c.SaveUploadedFile(file, filePath)
 		if err != nil {
 			global.Log.Error(err.Error())
-			UploadFiles = initFileUploadRes(UploadFiles, -1, file, "上传失败："+err.Error())
+			fileResponse = initFileUploadResSingle(-1, file, "上传失败："+err.Error())
+			UploadFiles = append(UploadFiles, fileResponse)
 			continue
 		}
-		UploadFiles = initFileUploadRes(UploadFiles, 0, file, "上传成功！")
-		bannerModel = models.BannerModel{Hash: md5Str, Path: filePath, Name: fileName}
-		bannerModel.MODEL = models.MODEL{CreateAt: utils.GetNowTimeHasFormat()}
-		global.DB.Create(&bannerModel)
+		UploadFiles = append(UploadFiles, fileResponse)
 
 	}
 
 	res.OKWithData(UploadFiles, c)
 }
 
-func initFileUploadRes(f []FileUploadResponse, code int, file *multipart.FileHeader, msg string) []FileUploadResponse {
-	if f == nil {
-		f = make([]FileUploadResponse, 0)
-	}
-	f = append(f, FileUploadResponse{
+func initFileUploadResSingle(code int, file *multipart.FileHeader, msg string) (f image_ser.FileUploadResponse) {
+	f = image_ser.FileUploadResponse{
 		FileName: file.Filename,
 		Code:     code,
 		Msg:      msg,
-	})
+	}
 	return f
 }
