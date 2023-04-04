@@ -19,12 +19,17 @@ func CommonList[T any](model T, option Option) (list []T, count int64, err error
 		DB = global.DB.Session(&gorm.Session{Logger: global.MysqlLogConfig.MysqlLog})
 	}
 
+	//定制排序默认值
+	if option.Sort == "" {
+		option.Sort = "create_at desc" //默认时间倒序
+	}
+
 	count = DB.Select("id").Find(&list).RowsAffected
 	//确认页数
 	offest := (option.Page - 1) * option.Limit
 	if offest < 0 {
 		offest = 0
 	}
-	err = DB.Limit(option.Limit).Offset(offest).Find(&list).Error
+	err = DB.Limit(option.Limit).Offset(offest).Order(option.Sort).Find(&list).Error
 	return list, count, err
 }

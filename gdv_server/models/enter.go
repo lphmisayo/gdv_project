@@ -24,3 +24,7 @@ type MysqlLogSt struct {
 	MysqlLog logger.Interface
 	Debug    bool
 }
+
+type RemoveRequest struct {
+	IDList []uint `json:"id_list"`
+}
