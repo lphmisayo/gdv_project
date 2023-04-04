@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"gvd_project/global"
+	"gvd_server/global"
 )
 
 func InitRouter() *gin.Engine {

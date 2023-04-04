@@ -3,10 +3,10 @@ package settings_api
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"gvd_project/config"
-	"gvd_project/core"
-	"gvd_project/global"
-	"gvd_project/models/res"
+	"gvd_server/config"
+	"gvd_server/core"
+	"gvd_server/global"
+	"gvd_server/models/res"
 )
 
 func (s SettingsApi) SettingsEmailInfoView(c *gin.Context) {

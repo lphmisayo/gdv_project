@@ -5,7 +5,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"gvd_project/global"
+	"gvd_server/global"
 	"time"
 )
 

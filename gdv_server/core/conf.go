@@ -3,8 +3,8 @@ package core
 import (
 	"fmt"
 	"gopkg.in/yaml.v2"
-	"gvd_project/config"
-	"gvd_project/global"
+	"gvd_server/config"
+	"gvd_server/global"
 	"io/ioutil"
 	"log"
 )

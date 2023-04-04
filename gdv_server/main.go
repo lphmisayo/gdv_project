@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"gvd_project/core"
-	"gvd_project/flag"
-	"gvd_project/global"
-	"gvd_project/router"
+	"gvd_server/core"
+	"gvd_server/flag"
+	"gvd_server/global"
+	"gvd_server/router"
 )
 
 // 服务入口
@@ -34,7 +34,7 @@ func main() {
 	addr := global.Config.System.Addr()
 	//获取路由配置
 	routers := router.InitRouter()
-	global.Log.Infof("gvd_project 运行在：%s", addr)
+	global.Log.Infof("gvd_server 运行在：%s", addr)
 	//启动服务
 	err := routers.Run(addr)
 	if err != nil {

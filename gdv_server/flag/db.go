@@ -2,8 +2,8 @@ package flag
 
 import (
 	"fmt"
-	"gvd_project/global"
-	"gvd_project/models"
+	"gvd_server/global"
+	"gvd_server/models"
 )
 
 func MakeMigration() {

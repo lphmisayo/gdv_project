@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"gvd_project/api"
+	"gvd_server/api"
 )
 
 func SettingsRouter(router *gin.RouterGroup) {

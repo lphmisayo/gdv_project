@@ -2,8 +2,8 @@ package settings_api
 
 import (
 	"github.com/gin-gonic/gin"
-	"gvd_project/global"
-	"gvd_project/models/res"
+	"gvd_server/global"
+	"gvd_server/models/res"
 )
 
 type SettingUri struct {

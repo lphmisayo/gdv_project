@@ -1,8 +1,8 @@
 package api
 
 import (
-	"gvd_project/api/images_api"
-	"gvd_project/api/settings_api"
+	"gvd_server/api/images_api"
+	"gvd_server/api/settings_api"
 )
 
 type ApiGroup struct {

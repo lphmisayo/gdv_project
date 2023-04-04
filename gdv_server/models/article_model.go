@@ -1,6 +1,6 @@
 package models
 
-import "gvd_project/models/ctype"
+import "gvd_server/models/ctype"
 
 type ArticleModel struct {
 	MODEL

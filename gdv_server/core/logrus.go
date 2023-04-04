@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/sirupsen/logrus"
-	"gvd_project/global"
+	"gvd_server/global"
 	"os"
 	"path"
 )
